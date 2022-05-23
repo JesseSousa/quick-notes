@@ -3,10 +3,15 @@ const BUTTON_TYPE_STYLES = {
   default: 'bg-stone-300 text-teal-600',
 };
 
-const Button = ({ children, buttonType = 'default', ...otherProps }) => {
+const Button = ({
+  children,
+  buttonType = 'default',
+  customClass,
+  ...otherProps
+}) => {
   return (
     <button
-      className={`${BUTTON_TYPE_STYLES[buttonType]} px-4 py-2 my-2 rounded hover:shadow-lg hover:scale-105 ease-in duration-300`}
+      className={`${customClass} ${BUTTON_TYPE_STYLES[buttonType]} px-4 py-2 my-2 rounded hover:shadow-lg hover:scale-105 ease-in duration-300`}
       {...otherProps}
     >
       {children}
