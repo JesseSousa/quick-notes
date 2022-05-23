@@ -12,10 +12,10 @@ const Container = ({ children, className }) => {
         md:shadow-xl 
         h-full ${className}
       `}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.75 }}
-      exit={{ opacity: 0 }}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      exit={{ opacity: 0, scale: 0 }}
     >
       {children}
     </motion.div>
