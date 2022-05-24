@@ -23,14 +23,16 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
-      <form>
+    <div className="w-full p-4 flex flex-col items-stretch">
+      <h1 className="text-lg font-bold text-center mb-2">Welcome Back!</h1>
+      <form className="flex flex-col items-stretch">
         <FormInput
           label="Email"
           type="text"
           name="email"
           value={email}
           onChange={handleChange}
+          required
         />
         <FormInput
           label="Password"
@@ -38,12 +40,15 @@ const LoginForm = () => {
           name="password"
           value={password}
           onChange={handleChange}
+          required
         />
-        <Button>Submit</Button>
+        <div className="self-center">
+          <Button style={{ marginRight: '.5rem' }}>Sign In</Button>
+          <Button buttonType="google" onClick={googleSignIn}>
+            Sign In with Google
+          </Button>
+        </div>
       </form>
-      <Button buttonType="google" onClick={googleSignIn}>
-        Sign In with Google
-      </Button>
     </div>
   );
 };
