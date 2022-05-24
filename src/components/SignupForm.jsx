@@ -26,7 +26,16 @@ const SignupForm = () => {
       // Get random profile picture URL
       const PHOTO_URL = `https://avatars.dicebear.com/api/big-smile/${user.uid}.svg`;
 
-      createUserDoc({ ...user, displayName, photoURL: PHOTO_URL });
+      // Stores the snapshot to check if the user was registerd
+      const userSnapshot = await createUserDoc({
+        ...user,
+        displayName,
+        photoURL: PHOTO_URL,
+      });
+
+      // Check if user registered
+      if (userSnapshot.exists()) {
+      }
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('The current email is already being used');
