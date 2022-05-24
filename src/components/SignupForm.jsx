@@ -23,7 +23,10 @@ const SignupForm = () => {
     try {
       const { user } = await signUpWithEmailAndPassword(email, password);
 
-      createUserDoc({ ...user, displayName });
+      // Get random profile picture URL
+      const PHOTO_URL = `https://avatars.dicebear.com/api/big-smile/${user.uid}.svg`;
+
+      createUserDoc({ ...user, displayName, photoURL: PHOTO_URL });
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
         alert('The current email is already being used');
