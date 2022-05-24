@@ -7,6 +7,8 @@ import {
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
 
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyBdjw7-hNqt5YGiSw27Ezjr8VlcG0Bmbp0',
   authDomain: 'quick-notes-26c52.firebaseapp.com',
@@ -29,3 +31,28 @@ export const signInUserWithEmailAndPassword = (email, password) =>
 
 export const signUpWithEmailAndPassword = (email, password) =>
   createUserWithEmailAndPassword(auth, email, password);
+
+export const db = getFirestore();
+
+export const createUserDoc = async (userAuth) => {
+  const { displayName, email, photoURL, uid } = userAuth;
+  const userDocRef = doc(db, 'users', uid);
+  console.log(userDocRef);
+
+  const userSnapshot = await getDoc(userDocRef);
+
+  if (!userSnapshot.exists()) {
+    setDoc(userDocRef, {
+      displayName,
+      email,
+      photoURL,
+      workspace: {
+        folders: [],
+        notes: [],
+      },
+      bio: '',
+    });
+  }
+
+  return userSnapshot;
+};
