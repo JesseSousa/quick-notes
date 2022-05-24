@@ -28,7 +28,7 @@ const LoginForm = () => {
       <form className="flex flex-col items-stretch">
         <FormInput
           label="Email"
-          type="text"
+          type="email"
           name="email"
           value={email}
           onChange={handleChange}
