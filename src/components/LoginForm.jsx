@@ -43,8 +43,10 @@ const LoginForm = () => {
           required
         />
         <div className="self-center">
-          <Button style={{ marginRight: '.5rem' }}>Sign In</Button>
-          <Button buttonType="google" onClick={googleSignIn}>
+          <Button type="submit" style={{ marginRight: '.5rem' }}>
+            Sign In
+          </Button>
+          <Button type="button" buttonType="google" onClick={googleSignIn}>
             Sign In with Google
           </Button>
         </div>
