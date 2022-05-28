@@ -34,8 +34,12 @@ export const signInUserWithEmailAndPassword = (email, password) => {
   signInWithEmailAndPassword(auth, email, password);
 };
 
-export const signUpWithEmailAndPassword = (email, password, displayName) => {
-  const { user } = createUserWithEmailAndPassword(auth, email, password);
+export const signUpWithEmailAndPassword = async (
+  email,
+  password,
+  displayName
+) => {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
   const photoURL = `https://avatars.dicebear.com/api/big-smile/${user.uid}.svg`;
   createUserDoc({ ...user, displayName, photoURL });
 };
