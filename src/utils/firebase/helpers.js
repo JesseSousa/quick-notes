@@ -1,13 +1,14 @@
 import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { db } from './firebase';
 import { success, failure } from '../toasts';
 
 export const createUserDoc = async (userAuth) => {
   try {
+    const { displayName, email, photoURL, uid } = userAuth;
+
     const userDocRef = doc(db, 'users', uid);
     const userSnapshot = await getDoc(userDocRef);
     if (userSnapshot.exists()) return;
-
-    const { displayName, email, photoURL, uid } = userAuth;
 
     const USER_INITIAL_DATA = {
       displayName,
