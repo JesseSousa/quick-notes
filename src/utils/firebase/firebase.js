@@ -30,9 +30,8 @@ export const signInWithGooglePopup = () => {
   createUserDoc(user);
 };
 
-export const signInUserWithEmailAndPassword = (email, password) => {
+export const signInUserWithEmailAndPassword = (email, password) =>
   signInWithEmailAndPassword(auth, email, password);
-};
 
 export const signUpWithEmailAndPassword = async (
   email,
