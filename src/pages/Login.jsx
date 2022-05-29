@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
+
 import Container from '../components/Container';
 import LoginForm from '../components/LoginForm';
 import SignupForm from '../components/SignupForm';
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   return (
     <Container>
       <div className="flex flex-col md:flex-row items-center justify-center h-full">
