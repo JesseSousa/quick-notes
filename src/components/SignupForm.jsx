@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { signUpWithEmailAndPassword } from '../utils/firebase/firebase';
+import { success, failure } from '../utils/toasts';
 
 import FormInput from './FormInput';
 import Button from './Button';
@@ -11,7 +12,7 @@ const DEFAULT_FORM_FIELDS = {
   confirmPassword: '',
 };
 
-const SignupForm = () => {
+const SignupForm = ({ isLoading, setIsLoading }) => {
   const [formFields, setFormFields] = useState(DEFAULT_FORM_FIELDS);
 
   const handleChange = (event) => {
@@ -19,7 +20,15 @@ const SignupForm = () => {
   };
 
   const signUp = async (email, password, displayName) => {
-    signUpWithEmailAndPassword(email, password, displayName);
+    setIsLoading(true);
+    try {
+      await signUpWithEmailAndPassword(email, password, displayName);
+      success('Signed up successfully!');
+    } catch (error) {
+      console.error(error.message);
+      failure('Something went wrong');
+    }
+    setIsLoading(false);
   };
 
   const handleSubmit = (event) => {
@@ -44,6 +53,7 @@ const SignupForm = () => {
           value={formFields.displayName}
           onChange={handleChange}
           required
+          disabled={isLoading}
         />
         <FormInput
           label="Email"
@@ -52,6 +62,7 @@ const SignupForm = () => {
           value={formFields.email}
           onChange={handleChange}
           required
+          disabled={isLoading}
         />
         <FormInput
           label="Password"
@@ -60,6 +71,7 @@ const SignupForm = () => {
           value={formFields.password}
           onChange={handleChange}
           required
+          disabled={isLoading}
         />
         <FormInput
           label="Confirm Password"
@@ -68,6 +80,7 @@ const SignupForm = () => {
           value={formFields.confirmPassword}
           onChange={handleChange}
           required
+          disabled={isLoading}
         />
         <Button customClass="self-center">Sign Up</Button>
       </form>
