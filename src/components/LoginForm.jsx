@@ -21,6 +21,16 @@ const LoginForm = ({ isLoading, setIsLoading }) => {
     setFormFields({ ...formFields, [event.target.name]: event.target.value });
   };
 
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithGooglePopup();
+      success("You're logged in");
+    } catch (error) {
+      console.error(error.message);
+      failure('Something went wrong');
+    }
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -73,11 +83,7 @@ const LoginForm = ({ isLoading, setIsLoading }) => {
           <Button type="submit" style={{ marginRight: '.5rem' }}>
             Sign In
           </Button>
-          <Button
-            type="button"
-            buttonType="google"
-            onClick={signInWithGooglePopup}
-          >
+          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
             Sign In with Google
           </Button>
         </div>
