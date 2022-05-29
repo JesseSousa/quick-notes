@@ -25,6 +25,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const provider = new GoogleAuthProvider();
 
 export const auth = getAuth();
+
 export const signInWithGooglePopup = () => {
   const { user } = signInWithPopup(auth, provider);
   createUserDoc(user);
@@ -40,7 +41,7 @@ export const signUpWithEmailAndPassword = async (
 ) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   const photoURL = `https://avatars.dicebear.com/api/big-smile/${user.uid}.svg`;
-  createUserDoc({ ...user, displayName, photoURL });
+  await createUserDoc({ ...user, displayName, photoURL });
 };
 
 export const db = getFirestore();
